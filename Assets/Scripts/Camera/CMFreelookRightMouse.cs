@@ -8,7 +8,7 @@ public class CMFreelookRightMouse : MonoBehaviour
         CinemachineCore.GetInputAxis = GetAxisCustom;
     }
 
-    public float GetAxisCustom(string axisName)
+    private float GetAxisCustom(string axisName)
     {
         if(axisName == "Mouse X")
         {
