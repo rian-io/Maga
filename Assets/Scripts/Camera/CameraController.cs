@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _target;
 
+    [Header("Zoom")]
     [SerializeField] private float _currentZoom = 20.0f;
     [SerializeField] private float _minZoom = 10.0f;
     [SerializeField] private float _maxZoom = 30.0f;
