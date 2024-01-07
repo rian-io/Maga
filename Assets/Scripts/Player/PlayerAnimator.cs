@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class PlayerAnimator : MonoBehaviour
 {
     private float _dampTime = .0f;

@@ -1,20 +1,20 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(PlayerMotor))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private LayerMask _movementMask;
+    [SerializeField] private float _speed = 3.5f;
 
+    private NavMeshAgent _agent;
     private Camera _cam;
-
-    private PlayerMotor _motor;
 
     // Start is called before the first frame update
     private void Start()
     {
         _cam = Camera.main;
-        _motor = GetComponent<PlayerMotor>();
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.speed = _speed;
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray.origin, ray.direction, out var hitInfo))
             {
-                _motor.MoveToPoint(hitInfo.point);
+                _agent.destination = hitInfo.point;
             }
         }
     }

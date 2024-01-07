@@ -396,7 +396,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 724495489, guid: ccd8c3b89aa02e943a08ab9238a8a70c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -545,9 +546,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 724495482}
   _currentZoom: 25
-  _minZoom: 10
-  _maxZoom: 30
   _zoomSpeed: 10
+  _minZoom: 10
+  _maxZoom: 40
   _rotationSpeed: 5
   _minVertAngle: 30
   _maxVertAngle: 60
