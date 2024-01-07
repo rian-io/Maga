@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
@@ -22,11 +23,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100, _movementMask))
+            if (Physics.Raycast(ray.origin, ray.direction, out var hitInfo))
             {
-                _motor.MoveToPoint(hit.point);
+                _motor.MoveToPoint(hitInfo.point);
             }
         }
     }

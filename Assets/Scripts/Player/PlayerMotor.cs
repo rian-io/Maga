@@ -16,7 +16,10 @@ public class PlayerMotor : MonoBehaviour
 
     public void MoveToPoint(Vector3 point)
     {
+        var randomOffset = Random.insideUnitSphere * 0.5f;
+        randomOffset.y = 0;
+
         _agent.speed = _speed;
-        _agent.SetDestination(point);
+        _agent.destination = point + randomOffset;
     }
 }
