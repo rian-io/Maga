@@ -333,6 +333,10 @@ PrefabInstance:
       value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 724495488, guid: ccd8c3b89aa02e943a08ab9238a8a70c, type: 3}
+      propertyPath: _speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 724495488, guid: ccd8c3b89aa02e943a08ab9238a8a70c, type: 3}
       propertyPath: _movementMask.m_Bits
       value: 8
       objectReference: {fileID: 0}
@@ -545,13 +549,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 724495482}
-  _currentZoom: 25
-  _zoomSpeed: 10
+  _currentZoom: 45
+  _zoomSpeed: 0.25
   _minZoom: 10
   _maxZoom: 40
-  _rotationSpeed: 5
+  _rotationHSpeed: 3
+  _rotationVSpeed: 1.5
   _minVertAngle: 30
   _maxVertAngle: 60
+  _rotationTime: 60
 --- !u!1 &2009865157
 GameObject:
   m_ObjectHideFlags: 0
