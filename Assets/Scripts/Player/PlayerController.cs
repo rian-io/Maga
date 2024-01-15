@@ -1,41 +1,48 @@
+using NOX.Maga.Data;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class PlayerController : MonoBehaviour
+namespace NOX.Maga.Interactions
 {
-    [SerializeField] private float _speed = 3.5f;
-
-    private NavMeshAgent _agent;
-    private InputSystem _inputActions;
-
-    private void Awake()
+    [RequireComponent(typeof(NavMeshAgent))]
+    public class PlayerController : MonoBehaviour
     {
-        _agent = GetComponent<NavMeshAgent>();
-        _agent.speed = _speed;
+        [SerializeField] private PlayerData _playerData;
 
-        _inputActions = new InputSystem();
-    }
+        [SerializeField] private LayerMask _movementMask;
 
-    private void OnEnable()
-    {
-        _inputActions.Enable();
-    }
+        private NavMeshAgent _navAgent;
+        private InputSystem _inputActions;
 
-    private void OnDisable()
-    {
-        _inputActions.Disable();
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        if (_inputActions.Player.Move.IsPressed())
+        private void Awake()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray.origin, ray.direction, out var hitInfo))
+            _navAgent = GetComponent<NavMeshAgent>();
+            _navAgent.speed = _playerData.Speed;
+
+            _inputActions = new InputSystem();
+        }
+
+        private void OnEnable()
+        {
+            _inputActions.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _inputActions.Disable();
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            if (_inputActions.Player.Move.IsPressed())
             {
-                _agent.destination = hitInfo.point;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray.origin, ray.direction, out var hitInfo)
+                    && hitInfo.transform.CompareTag("Ground"))
+                {
+                    _navAgent.destination = hitInfo.point;
+                }
             }
         }
     }

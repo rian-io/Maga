@@ -35,6 +35,42 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""247dfa27-7d4e-4f6d-9a49-9f643401dbe5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab4d6a2f-02a6-4d7d-8eb8-b4c36704ad15"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkellThree"",
+                    ""type"": ""Button"",
+                    ""id"": ""af0278cc-c2ae-49f1-9538-cf2d7c95534f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillFour"",
+                    ""type"": ""Button"",
+                    ""id"": ""53af45e2-ddc6-4475-90ba-8dc4e9d8e46c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -46,6 +82,50 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be99cf44-95ee-45d8-8ef9-012a0273913e"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6278e74f-2008-40ea-b057-4f29a13a594a"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""116d3234-3455-4cb5-b65d-738ace064d52"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkellThree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c783694-fabc-4099-a871-c85532c33295"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillFour"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -65,7 +145,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""EnableControl"",
+                    ""name"": ""Enable Control"",
                     ""type"": ""Button"",
                     ""id"": ""1debd824-d7d3-46a6-b547-778bde8d03ba"",
                     ""expectedControlType"": ""Button"",
@@ -81,6 +161,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Reset Camera"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd51b5e1-a6ac-4ed6-b496-ec8aa6b9318a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -102,7 +191,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""EnableControl"",
+                    ""action"": ""Enable Control"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -116,6 +205,17 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""Control"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24768c7e-cc18-4c70-a5e8-f08760597f9c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -125,11 +225,16 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_SkillOne = m_Player.FindAction("SkillOne", throwIfNotFound: true);
+        m_Player_SkillTwo = m_Player.FindAction("SkillTwo", throwIfNotFound: true);
+        m_Player_SkellThree = m_Player.FindAction("SkellThree", throwIfNotFound: true);
+        m_Player_SkillFour = m_Player.FindAction("SkillFour", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
-        m_Camera_EnableControl = m_Camera.FindAction("EnableControl", throwIfNotFound: true);
+        m_Camera_EnableControl = m_Camera.FindAction("Enable Control", throwIfNotFound: true);
         m_Camera_Control = m_Camera.FindAction("Control", throwIfNotFound: true);
+        m_Camera_ResetCamera = m_Camera.FindAction("Reset Camera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -192,11 +297,19 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_SkillOne;
+    private readonly InputAction m_Player_SkillTwo;
+    private readonly InputAction m_Player_SkellThree;
+    private readonly InputAction m_Player_SkillFour;
     public struct PlayerActions
     {
         private @InputSystem m_Wrapper;
         public PlayerActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @SkillOne => m_Wrapper.m_Player_SkillOne;
+        public InputAction @SkillTwo => m_Wrapper.m_Player_SkillTwo;
+        public InputAction @SkellThree => m_Wrapper.m_Player_SkellThree;
+        public InputAction @SkillFour => m_Wrapper.m_Player_SkillFour;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -209,6 +322,18 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @SkillOne.started += instance.OnSkillOne;
+            @SkillOne.performed += instance.OnSkillOne;
+            @SkillOne.canceled += instance.OnSkillOne;
+            @SkillTwo.started += instance.OnSkillTwo;
+            @SkillTwo.performed += instance.OnSkillTwo;
+            @SkillTwo.canceled += instance.OnSkillTwo;
+            @SkellThree.started += instance.OnSkellThree;
+            @SkellThree.performed += instance.OnSkellThree;
+            @SkellThree.canceled += instance.OnSkellThree;
+            @SkillFour.started += instance.OnSkillFour;
+            @SkillFour.performed += instance.OnSkillFour;
+            @SkillFour.canceled += instance.OnSkillFour;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -216,6 +341,18 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @SkillOne.started -= instance.OnSkillOne;
+            @SkillOne.performed -= instance.OnSkillOne;
+            @SkillOne.canceled -= instance.OnSkillOne;
+            @SkillTwo.started -= instance.OnSkillTwo;
+            @SkillTwo.performed -= instance.OnSkillTwo;
+            @SkillTwo.canceled -= instance.OnSkillTwo;
+            @SkellThree.started -= instance.OnSkellThree;
+            @SkellThree.performed -= instance.OnSkellThree;
+            @SkellThree.canceled -= instance.OnSkellThree;
+            @SkillFour.started -= instance.OnSkillFour;
+            @SkillFour.performed -= instance.OnSkillFour;
+            @SkillFour.canceled -= instance.OnSkillFour;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -240,6 +377,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Camera_Zoom;
     private readonly InputAction m_Camera_EnableControl;
     private readonly InputAction m_Camera_Control;
+    private readonly InputAction m_Camera_ResetCamera;
     public struct CameraActions
     {
         private @InputSystem m_Wrapper;
@@ -247,6 +385,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         public InputAction @Zoom => m_Wrapper.m_Camera_Zoom;
         public InputAction @EnableControl => m_Wrapper.m_Camera_EnableControl;
         public InputAction @Control => m_Wrapper.m_Camera_Control;
+        public InputAction @ResetCamera => m_Wrapper.m_Camera_ResetCamera;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -265,6 +404,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Control.started += instance.OnControl;
             @Control.performed += instance.OnControl;
             @Control.canceled += instance.OnControl;
+            @ResetCamera.started += instance.OnResetCamera;
+            @ResetCamera.performed += instance.OnResetCamera;
+            @ResetCamera.canceled += instance.OnResetCamera;
         }
 
         private void UnregisterCallbacks(ICameraActions instance)
@@ -278,6 +420,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Control.started -= instance.OnControl;
             @Control.performed -= instance.OnControl;
             @Control.canceled -= instance.OnControl;
+            @ResetCamera.started -= instance.OnResetCamera;
+            @ResetCamera.performed -= instance.OnResetCamera;
+            @ResetCamera.canceled -= instance.OnResetCamera;
         }
 
         public void RemoveCallbacks(ICameraActions instance)
@@ -298,11 +443,16 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnSkillOne(InputAction.CallbackContext context);
+        void OnSkillTwo(InputAction.CallbackContext context);
+        void OnSkellThree(InputAction.CallbackContext context);
+        void OnSkillFour(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
         void OnZoom(InputAction.CallbackContext context);
         void OnEnableControl(InputAction.CallbackContext context);
         void OnControl(InputAction.CallbackContext context);
+        void OnResetCamera(InputAction.CallbackContext context);
     }
 }
