@@ -37,7 +37,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SkillOne"",
+                    ""name"": ""SelectSkill"",
                     ""type"": ""Button"",
                     ""id"": ""247dfa27-7d4e-4f6d-9a49-9f643401dbe5"",
                     ""expectedControlType"": ""Button"",
@@ -46,27 +46,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SkillTwo"",
+                    ""name"": ""ActivateSkill"",
                     ""type"": ""Button"",
-                    ""id"": ""ab4d6a2f-02a6-4d7d-8eb8-b4c36704ad15"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SkellThree"",
-                    ""type"": ""Button"",
-                    ""id"": ""af0278cc-c2ae-49f1-9538-cf2d7c95534f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SkillFour"",
-                    ""type"": ""Button"",
-                    ""id"": ""53af45e2-ddc6-4475-90ba-8dc4e9d8e46c"",
+                    ""id"": ""6985168a-57d4-4ec5-b19e-189a8275811a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -92,40 +74,51 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SkillOne"",
+                    ""action"": ""SelectSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6278e74f-2008-40ea-b057-4f29a13a594a"",
+                    ""id"": ""57724ead-cbd3-47b9-a138-28328a9847a7"",
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SkillTwo"",
+                    ""action"": ""SelectSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""116d3234-3455-4cb5-b65d-738ace064d52"",
+                    ""id"": ""094fe749-eff8-4115-8f62-96a6066e8d49"",
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SkellThree"",
+                    ""action"": ""SelectSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6c783694-fabc-4099-a871-c85532c33295"",
+                    ""id"": ""b37ca95b-8799-4c5b-a4dd-3dc7297732d2"",
                     ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SkillFour"",
+                    ""action"": ""SelectSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ceeabb28-2b74-40f6-bb0b-31b2ee7217af"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -225,10 +218,8 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_SkillOne = m_Player.FindAction("SkillOne", throwIfNotFound: true);
-        m_Player_SkillTwo = m_Player.FindAction("SkillTwo", throwIfNotFound: true);
-        m_Player_SkellThree = m_Player.FindAction("SkellThree", throwIfNotFound: true);
-        m_Player_SkillFour = m_Player.FindAction("SkillFour", throwIfNotFound: true);
+        m_Player_SelectSkill = m_Player.FindAction("SelectSkill", throwIfNotFound: true);
+        m_Player_ActivateSkill = m_Player.FindAction("ActivateSkill", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
@@ -297,19 +288,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_SkillOne;
-    private readonly InputAction m_Player_SkillTwo;
-    private readonly InputAction m_Player_SkellThree;
-    private readonly InputAction m_Player_SkillFour;
+    private readonly InputAction m_Player_SelectSkill;
+    private readonly InputAction m_Player_ActivateSkill;
     public struct PlayerActions
     {
         private @InputSystem m_Wrapper;
         public PlayerActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @SkillOne => m_Wrapper.m_Player_SkillOne;
-        public InputAction @SkillTwo => m_Wrapper.m_Player_SkillTwo;
-        public InputAction @SkellThree => m_Wrapper.m_Player_SkellThree;
-        public InputAction @SkillFour => m_Wrapper.m_Player_SkillFour;
+        public InputAction @SelectSkill => m_Wrapper.m_Player_SelectSkill;
+        public InputAction @ActivateSkill => m_Wrapper.m_Player_ActivateSkill;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -322,18 +309,12 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @SkillOne.started += instance.OnSkillOne;
-            @SkillOne.performed += instance.OnSkillOne;
-            @SkillOne.canceled += instance.OnSkillOne;
-            @SkillTwo.started += instance.OnSkillTwo;
-            @SkillTwo.performed += instance.OnSkillTwo;
-            @SkillTwo.canceled += instance.OnSkillTwo;
-            @SkellThree.started += instance.OnSkellThree;
-            @SkellThree.performed += instance.OnSkellThree;
-            @SkellThree.canceled += instance.OnSkellThree;
-            @SkillFour.started += instance.OnSkillFour;
-            @SkillFour.performed += instance.OnSkillFour;
-            @SkillFour.canceled += instance.OnSkillFour;
+            @SelectSkill.started += instance.OnSelectSkill;
+            @SelectSkill.performed += instance.OnSelectSkill;
+            @SelectSkill.canceled += instance.OnSelectSkill;
+            @ActivateSkill.started += instance.OnActivateSkill;
+            @ActivateSkill.performed += instance.OnActivateSkill;
+            @ActivateSkill.canceled += instance.OnActivateSkill;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -341,18 +322,12 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @SkillOne.started -= instance.OnSkillOne;
-            @SkillOne.performed -= instance.OnSkillOne;
-            @SkillOne.canceled -= instance.OnSkillOne;
-            @SkillTwo.started -= instance.OnSkillTwo;
-            @SkillTwo.performed -= instance.OnSkillTwo;
-            @SkillTwo.canceled -= instance.OnSkillTwo;
-            @SkellThree.started -= instance.OnSkellThree;
-            @SkellThree.performed -= instance.OnSkellThree;
-            @SkellThree.canceled -= instance.OnSkellThree;
-            @SkillFour.started -= instance.OnSkillFour;
-            @SkillFour.performed -= instance.OnSkillFour;
-            @SkillFour.canceled -= instance.OnSkillFour;
+            @SelectSkill.started -= instance.OnSelectSkill;
+            @SelectSkill.performed -= instance.OnSelectSkill;
+            @SelectSkill.canceled -= instance.OnSelectSkill;
+            @ActivateSkill.started -= instance.OnActivateSkill;
+            @ActivateSkill.performed -= instance.OnActivateSkill;
+            @ActivateSkill.canceled -= instance.OnActivateSkill;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -443,10 +418,8 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnSkillOne(InputAction.CallbackContext context);
-        void OnSkillTwo(InputAction.CallbackContext context);
-        void OnSkellThree(InputAction.CallbackContext context);
-        void OnSkillFour(InputAction.CallbackContext context);
+        void OnSelectSkill(InputAction.CallbackContext context);
+        void OnActivateSkill(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

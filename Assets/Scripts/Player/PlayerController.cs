@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.CompilerServices;
 using NOX.Maga.Data;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,41 +11,65 @@ namespace NOX.Maga.Interactions
     {
         [SerializeField] private PlayerData _playerData;
 
-        [SerializeField] private LayerMask _movementMask;
-
         private NavMeshAgent _navAgent;
-        private InputSystem _inputActions;
+
+        private bool _canMove = true;
 
         private void Awake()
         {
             _navAgent = GetComponent<NavMeshAgent>();
             _navAgent.speed = _playerData.Speed;
-
-            _inputActions = new InputSystem();
         }
 
-        private void OnEnable()
+        private void Start()
         {
-            _inputActions.Enable();
+            EventManager.OnAction += hitInfo => Move(hitInfo);
+            EventManager.OnSkillDisableMovement += DisableMovement;
+            EventManager.OnSkillEnableMovement += EnableMovement;
+            EventManager.OnSkillCastFinished += EnableMovement;
+            EventManager.OnSkillActivated += StopMoveToCast;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            _inputActions.Disable();
+            EventManager.OnAction -= hitInfo => Move(hitInfo);
+            EventManager.OnSkillDisableMovement -= DisableMovement;
+            EventManager.OnSkillEnableMovement -= EnableMovement;
+            EventManager.OnSkillCastFinished -= EnableMovement;
+            EventManager.OnSkillActivated -= StopMoveToCast;
         }
 
-        // Update is called once per frame
-        private void Update()
+        private void Move(RaycastHit hitInfo)
         {
-            if (_inputActions.Player.Move.IsPressed())
+            if (_canMove && !hitInfo.transform.CompareTag("Player"))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray.origin, ray.direction, out var hitInfo)
-                    && hitInfo.transform.CompareTag("Ground"))
+                if (hitInfo.transform.CompareTag("Enemy"))
                 {
-                    _navAgent.destination = hitInfo.point;
+                    _navAgent.stoppingDistance = _playerData.SkillDistance;
                 }
+                else
+                {
+                    _navAgent.stoppingDistance = _playerData.NormalDistance;
+                }
+                _navAgent.destination = hitInfo.point;
             }
+        }
+
+        private void StopMoveToCast()
+        {
+            _navAgent.ResetPath();
+
+            DisableMovement();
+        }
+
+        private void EnableMovement()
+        {
+            _canMove = true;
+        }
+
+        private void DisableMovement()
+        {
+            _canMove = false;
         }
     }
 }
