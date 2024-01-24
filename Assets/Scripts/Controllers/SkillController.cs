@@ -6,13 +6,13 @@ using UnityEngine.InputSystem;
 
 public class SkillController : MonoBehaviour
 {
-    [SerializeField] private Skill[] _skills = new Skill[4];
+    [SerializeField] private SkillData[] _skills = new SkillData[4];
 
     private InputSystem _inputSystem;
 
-    private Skill _selectedSkill;
+    private SkillData _selectedSkill;
 
-    private Skill _activeSkill;
+    private SkillData _activeSkill;
 
     private bool _casting = false;
 
@@ -36,19 +36,19 @@ public class SkillController : MonoBehaviour
 
     private void SelectSkill(InputAction.CallbackContext context)
     {
-        if (_casting) return;
-
         try
         {
             var skillIndex = Int32.Parse(context.control.name) - 1;
             _selectedSkill = _skills[skillIndex];
+
             if (_selectedSkill.Equals(_activeSkill))
             {
                 ResetSelection();
                 return;
             }
 
-            _selectedSkill.Select();
+            SkillBehaviour.Select(_selectedSkill);
+
             Debug.Log($"{_selectedSkill.Label} selected");
         }
         catch (IndexOutOfRangeException) { /* Not print stack trace when skill not equipped in the key pressed. */ }
@@ -56,12 +56,12 @@ public class SkillController : MonoBehaviour
 
     private void UseSkill()
     {
-        if (_selectedSkill == null) return;
+        if (_selectedSkill == null || _casting) return;
 
         _activeSkill = _selectedSkill;
         ResetSelection();
 
-        _activeSkill.Activate();
+        SkillBehaviour.Activate(_activeSkill);
         StartCoroutine(Cast());
     }
 
@@ -95,7 +95,9 @@ public class SkillController : MonoBehaviour
 
     private IEnumerator Cooldown()
     {
+        Debug.Log($"{_activeSkill.Label} cooldown started");
         yield return new WaitForSecondsRealtime(_activeSkill.CooldownTime);
+        Debug.Log($"{_activeSkill.Label} cooldown finished");
         ResetActive();
     }
 }

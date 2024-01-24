@@ -17,12 +17,6 @@ public static class EventManager
     public static event Action OnSkillActivated;
     public static void RaiseOnSkillActivated() => OnSkillActivated?.Invoke();
 
-    public static event Action OnSkillDisableMovement;
-    public static void RaiseOnSkillDisableMovement() => OnSkillDisableMovement?.Invoke();
-
-    public static event Action OnSkillEnableMovement;
-    public static void RaiseOnSkillEnableMovement() => OnSkillEnableMovement?.Invoke();
-
     public static event Action OnSkillCastFinished;
     public static void RaiseOnSkillCastFinished() => OnSkillCastFinished?.Invoke();
     #endregion

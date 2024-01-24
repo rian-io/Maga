@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NOX.Maga.Data
 {
-    [CreateAssetMenu(fileName = "CameraData", menuName = "Data/Camera")]
+    [CreateAssetMenu(fileName = "CameraData", menuName = "Data/Controller/Camera")]
     public class CameraData : ScriptableObject
     {
         [Header("Zoom")]

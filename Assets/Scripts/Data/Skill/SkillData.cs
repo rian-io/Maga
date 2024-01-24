@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NOX.Maga.Data.Skill
 {
-    public abstract class Skill : ScriptableObject
+    public abstract class SkillData : ScriptableObject
     {
         public bool Enabled;
         public string Label;
@@ -13,13 +13,6 @@ namespace NOX.Maga.Data.Skill
         public float ManaCost;
         public float CastTime;
         public float CooldownTime;
-
-        public virtual void Select()
-        { }
-
-        public virtual void Activate()
-        {
-            EventManager.RaiseOnSkillActivated();
-        }
+        public float Range;
     }
 }

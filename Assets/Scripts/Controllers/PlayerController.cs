@@ -24,8 +24,7 @@ namespace NOX.Maga.Interactions
         private void Start()
         {
             EventManager.OnAction += hitInfo => Move(hitInfo);
-            EventManager.OnSkillDisableMovement += DisableMovement;
-            EventManager.OnSkillEnableMovement += EnableMovement;
+            EventManager.OnSkillSelected += DisableMovement;
             EventManager.OnSkillCastFinished += EnableMovement;
             EventManager.OnSkillActivated += StopMoveToCast;
         }
@@ -33,8 +32,7 @@ namespace NOX.Maga.Interactions
         private void OnDestroy()
         {
             EventManager.OnAction -= hitInfo => Move(hitInfo);
-            EventManager.OnSkillDisableMovement -= DisableMovement;
-            EventManager.OnSkillEnableMovement -= EnableMovement;
+            EventManager.OnSkillSelected -= DisableMovement;
             EventManager.OnSkillCastFinished -= EnableMovement;
             EventManager.OnSkillActivated -= StopMoveToCast;
         }
