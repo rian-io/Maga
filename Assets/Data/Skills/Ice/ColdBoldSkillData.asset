@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ae26e7aa55941529fd9f939d8595e2, type: 3}
   m_Name: ColdBoldSkillData
   m_EditorClassIdentifier: 
-  Enabled: 0
+  IsEnabled: 1
   Label: Cold Bold
   Description: 
   Icon: 
   ManaCost: 0
   CastTime: 1
+  Range: 0
   CooldownTime: 2
   Damage: 20

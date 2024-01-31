@@ -6,13 +6,15 @@ namespace NOX.Maga.Data.Skill
 {
     public abstract class SkillData : ScriptableObject
     {
-        public bool Enabled;
+        public bool IsEnabled;
         public string Label;
         public string Description;
         public string Icon;
+
         public float ManaCost;
         public float CastTime;
-        public float CooldownTime;
         public float Range;
+
+        public float CooldownTime;
     }
 }

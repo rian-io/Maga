@@ -11,8 +11,14 @@ public static class EventManager
     #endregion
 
     #region Skills
+    public static event Action<int> OnSkillSelect;
+    public static void RaiseOnSkillSelect(int skillIndex) => OnSkillSelect?.Invoke(skillIndex);
+
     public static event Action OnSkillSelected;
     public static void RaiseOnSkillSelected() => OnSkillSelected?.Invoke();
+
+    public static event Action<RaycastHit> OnUseSkill;
+    public static void RaiseOnUseSkill(RaycastHit hitInfo) => OnUseSkill?.Invoke(hitInfo);
 
     public static event Action OnSkillActivated;
     public static void RaiseOnSkillActivated() => OnSkillActivated?.Invoke();

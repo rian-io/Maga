@@ -4,6 +4,7 @@ public static class SkillBehaviour
 {
     public static void Select(SkillData skill)
     {
+        skill.IsEnabled = false;
         // Stop to cast or finish path and disable movement
         EventManager.RaiseOnSkillSelected();
     }
@@ -22,5 +23,10 @@ public static class SkillBehaviour
         {
             // Verify target, if enemy move range and cast
         }
+    }
+
+    public static void Reset(SkillData skill)
+    {
+        skill.IsEnabled = true;
     }
 }

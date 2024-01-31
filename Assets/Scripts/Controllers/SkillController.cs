@@ -8,45 +8,35 @@ public class SkillController : MonoBehaviour
 {
     [SerializeField] private SkillData[] _skills = new SkillData[4];
 
-    private InputSystem _inputSystem;
-
     private SkillData _selectedSkill;
 
     private SkillData _activeSkill;
 
     private bool _casting = false;
 
-    private void Awake()
-    {
-        _inputSystem = new InputSystem();
-
-        _inputSystem.Player.SelectSkill.performed += ctx => SelectSkill(ctx);
-        _inputSystem.Player.ActivateSkill.canceled += _ => UseSkill();
-    }
-
     private void OnEnable()
     {
-        _inputSystem.Enable();
+        EventManager.OnSkillSelect += skillIndex => SelectSkill(skillIndex);
+        EventManager.OnUseSkill += hitInfo => UseSkill(hitInfo);
     }
 
     private void OnDisable()
     {
-        _inputSystem.Disable();
+        EventManager.OnSkillSelect -= skillIndex => SelectSkill(skillIndex);
+        EventManager.OnUseSkill -= hitInfo => UseSkill(hitInfo);
     }
 
-    private void SelectSkill(InputAction.CallbackContext context)
+    private void SelectSkill(int skillIndex)
     {
         try
         {
-            var skillIndex = Int32.Parse(context.control.name) - 1;
-            _selectedSkill = _skills[skillIndex];
-
-            if (_selectedSkill.Equals(_activeSkill))
+            if (!_skills[skillIndex].IsEnabled)
             {
                 ResetSelection();
                 return;
             }
 
+            _selectedSkill = _skills[skillIndex];
             SkillBehaviour.Select(_selectedSkill);
 
             Debug.Log($"{_selectedSkill.Label} selected");
@@ -54,7 +44,7 @@ public class SkillController : MonoBehaviour
         catch (IndexOutOfRangeException) { /* Not print stack trace when skill not equipped in the key pressed. */ }
     }
 
-    private void UseSkill()
+    private void UseSkill(RaycastHit? hitInfo)
     {
         if (_selectedSkill == null || _casting) return;
 
@@ -98,6 +88,7 @@ public class SkillController : MonoBehaviour
         Debug.Log($"{_activeSkill.Label} cooldown started");
         yield return new WaitForSecondsRealtime(_activeSkill.CooldownTime);
         Debug.Log($"{_activeSkill.Label} cooldown finished");
+        SkillBehaviour.Reset(_activeSkill);
         ResetActive();
     }
 }

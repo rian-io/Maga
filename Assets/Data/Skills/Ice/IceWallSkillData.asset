@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00bacbe6412447e5a578534cd34bf97, type: 3}
   m_Name: IceWallSkillData
   m_EditorClassIdentifier: 
-  Enabled: 0
+  IsEnabled: 1
   Label: Ice Wall
   Description: 
   Icon: 
   ManaCost: 0
   CastTime: 0.5
+  Range: 10
   CooldownTime: 0
   Life: 0.5
-  Range: 10
